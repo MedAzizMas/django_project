@@ -32,3 +32,5 @@ class Conference(models.Model):
                         
             )
         ]
+    def __str__(self) :
+        return f"title conference : {self.titre} , location : {self.location} , price : {self.price}"

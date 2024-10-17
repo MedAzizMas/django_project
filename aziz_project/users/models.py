@@ -42,11 +42,13 @@ class Reservation(models.Model):
         if self.conference.start_date < timezone.now().date():
             raise ValidationError("You can only reserve for upcoming conferences.")
         
-        # Check if the participant has already made 3 reservations on the same day
+        # Get the number of reservations for this participant on the same day
         reservation_count = Reservation.objects.filter(
-            participant=self.participant,
-            reservation_date=self.reservation_date  # Missing comma was added here
-        ).count()  # Use .count() to get the number of reservations
-
+            participant=self.participant
+            ,reservation_date__date=timezone.now().date()  # Use only the date part for filtering
+        ).count()
+        
+        
         if reservation_count >= 3:
             raise ValidationError("You can only make up to 3 reservations per day.")
+    
