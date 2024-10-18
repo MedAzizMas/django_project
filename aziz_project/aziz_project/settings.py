@@ -57,7 +57,7 @@ ROOT_URLCONF = 'aziz_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'aziz_project/templates'],  # relative path to your templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
